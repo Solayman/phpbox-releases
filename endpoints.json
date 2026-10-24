@@ -1,4 +1,6 @@
 {
-  "primary": "https://bongo.nobotech.xyz",
-  "fallback": ""
+  "version": 1,
+  "iv": "f73052dc517cda9160ce82a84333f431",
+  "data": "bf3dc80a89b9104758391a0d1f15ddf1d824e175aa7e87e366a4be7b643fa4a3c7c77caf7935c7e0a74497add607aaaeaeada6178f25",
+  "tag": "be06b44dda0d233a8eb3e01b41703211baacab697c29e07490116f0587fdef22"
 }

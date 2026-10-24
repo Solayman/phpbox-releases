@@ -1,0 +1,127 @@
+name: Sync Discovery Endpoints
+
+on:
+  workflow_dispatch:
+    inputs:
+      primary:
+        description: 'Primary API Base URL'
+        required: true
+        default: 'https://bongo.nobotech.xyz'
+      fallback:
+        description: 'Fallback API Base URL (optional)'
+        required: false
+        default: ''
+  push:
+    branches:
+      - master
+    paths:
+      - 'endpoints.json'
+
+permissions:
+  contents: write
+
+jobs:
+  encrypt-and-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Encrypt and Update Endpoints
+        env:
+          INPUT_PRIMARY: ${{ inputs.primary }}
+          INPUT_FALLBACK: ${{ inputs.fallback }}
+          SECRET_KEY: ${{ secrets.DISCOVERY_KEY }}
+        run: |
+          python3 - << 'EOF'
+          import os
+          import json
+          import hashlib
+
+          raw_key = os.environ.get("SECRET_KEY", "").strip()
+          if not raw_key:
+              raw_key = "phpbox_sec_discovery_key_2026_!!"
+          KEY = raw_key.encode("utf-8")
+          if len(KEY) != 32:
+              KEY = hashlib.sha256(KEY).digest()
+
+          def crypt(data: bytes, key: bytes, iv: bytes) -> bytes:
+              out = bytearray()
+              chunk_idx = 0
+              for i in range(0, len(data), 32):
+                  chunk = data[i:i + 32]
+                  h = hashlib.sha256(key + iv + chunk_idx.to_bytes(4, "big")).digest()
+                  for j in range(len(chunk)):
+                      out.append(chunk[j] ^ h[j])
+                  chunk_idx += 1
+              return bytes(out)
+
+          def compute_tag(key: bytes, iv: bytes, ciphertext: bytes) -> str:
+              return hashlib.sha256(key + iv + ciphertext + b"PHPBOX_ENDPOINT_AUTH").hexdigest()
+
+          primary = os.environ.get("INPUT_PRIMARY", "").strip()
+          fallback = os.environ.get("INPUT_FALLBACK", "").strip()
+
+          endpoints_file = "endpoints.json"
+          
+          # If not triggered via workflow_dispatch, check if endpoints.json was pushed as plain JSON
+          if not primary:
+              if os.path.exists(endpoints_file):
+                  try:
+                      with open(endpoints_file, "r", encoding="utf-8") as f:
+                          content = json.load(f)
+                      # If it has "primary" and lacks "data"/"tag", it's a plain JSON input
+                      if "primary" in content and "data" not in content:
+                          primary = content.get("primary", "")
+                          fallback = content.get("fallback", "")
+                          print(f"Detected plain JSON edit in {endpoints_file}. Encrypting...")
+                      else:
+                          print("endpoints.json is already encrypted. Nothing to do.")
+                          exit(0)
+                  except Exception as e:
+                      print(f"Error reading {endpoints_file}: {e}")
+                      exit(1)
+              else:
+                  print("No input provided and endpoints.json missing.")
+                  exit(1)
+
+          if not primary:
+              print("Primary endpoint cannot be empty.")
+              exit(1)
+
+          iv = os.urandom(16)
+          payload_obj = {
+              "primary": primary,
+              "fallback": fallback
+          }
+          payload_bytes = json.dumps(payload_obj, separators=(",", ":")).encode("utf-8")
+          ct = crypt(payload_bytes, KEY, iv)
+          tag = compute_tag(KEY, iv, ct)
+
+          encrypted_output = {
+              "version": 1,
+              "iv": iv.hex(),
+              "data": ct.hex(),
+              "tag": tag
+          }
+
+          with open(endpoints_file, "w", encoding="utf-8") as f:
+              json.dump(encrypted_output, f, indent=2)
+              f.write("\n")
+
+          print("Successfully encrypted endpoints.json.")
+          EOF
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add endpoints.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Encrypt discovery endpoints [skip ci]" && git push origin master)

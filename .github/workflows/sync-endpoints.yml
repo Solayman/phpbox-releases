@@ -8,7 +8,7 @@ on:
         required: true
         default: 'https://bongo.nobotech.xyz'
       fallback:
-        description: 'Fallback API Base URL (optional)'
+        description: 'Fallback API Base URL(s) - comma-separated for multiple'
         required: false
         default: ''
   push:
@@ -66,8 +66,28 @@ jobs:
           def compute_tag(key: bytes, iv: bytes, ciphertext: bytes) -> str:
               return hashlib.sha256(key + iv + ciphertext + b"PHPBOX_ENDPOINT_AUTH").hexdigest()
 
+          def normalize_fallbacks(val) -> list:
+              if not val:
+                  return []
+              if isinstance(val, (list, tuple)):
+                  res = []
+                  for x in val:
+                      s = str(x or "").strip()
+                      if s and s not in res:
+                          res.append(s)
+                  return res
+              if isinstance(val, str):
+                  res = []
+                  for part in val.split(","):
+                      s = part.strip()
+                      if s and s not in res:
+                          res.append(s)
+                  return res
+              return []
+
           primary = os.environ.get("INPUT_PRIMARY", "").strip()
-          fallback = os.environ.get("INPUT_FALLBACK", "").strip()
+          fallback_input = os.environ.get("INPUT_FALLBACK", "").strip()
+          fallbacks = normalize_fallbacks(fallback_input)
 
           endpoints_file = "endpoints.json"
           
@@ -79,8 +99,9 @@ jobs:
                           content = json.load(f)
                       # If it has "primary" and lacks "data"/"tag", it's a plain JSON input
                       if "primary" in content and "data" not in content:
-                          primary = content.get("primary", "")
-                          fallback = content.get("fallback", "")
+                          primary = content.get("primary", "").strip()
+                          raw_fb = content.get("fallbacks") if "fallbacks" in content else content.get("fallback")
+                          fallbacks = normalize_fallbacks(raw_fb)
                           print(f"Detected plain JSON edit in {endpoints_file}. Encrypting...")
                       else:
                           print("endpoints.json is already encrypted. Nothing to do.")
@@ -99,7 +120,8 @@ jobs:
           iv = os.urandom(16)
           payload_obj = {
               "primary": primary,
-              "fallback": fallback
+              "fallback": fallbacks[0] if fallbacks else "",
+              "fallbacks": fallbacks
           }
           payload_bytes = json.dumps(payload_obj, separators=(",", ":")).encode("utf-8")
           ct = crypt(payload_bytes, KEY, iv)
@@ -116,7 +138,7 @@ jobs:
               json.dump(encrypted_output, f, indent=2)
               f.write("\n")
 
-          print("Successfully encrypted endpoints.json.")
+          print(f"Successfully encrypted endpoints.json (Primary: {primary}, Fallbacks: {len(fallbacks)})")
           EOF
 
       - name: Commit and Push

@@ -7,10 +7,11 @@
 [![Release](https://img.shields.io/github/v/release/Solayman/phpbox-releases?color=10b981&label=Release&logo=github)](https://github.com/Solayman/phpbox-releases/releases/latest)
 [![Platforms](https://img.shields.io/badge/Platforms-Windows%20%7C%20Linux-3b82f6?logo=linux&logoColor=white)](https://github.com/Solayman/phpbox-releases/releases)
 [![Memory Footprint](https://img.shields.io/badge/Idle%20RAM-~150MB%20(Win)%20%7C%20~450MB%20(Linux)-06b6d4)](#-authentic-performance--hardware-benchmarks)
+[![Facebook](https://img.shields.io/badge/Facebook-Nobo%20Tech-1877F2?logo=facebook&logoColor=white)](https://www.facebook.com/profile.php?id=61595418016860)
 [![Publisher](https://img.shields.io/badge/Publisher-Nobo%20Tech-10b981)](https://nobotech.org)
 [![License](https://img.shields.io/badge/License-Proprietary-64748b)](https://nobotech.org)
 
-**[Official Website](https://nobotech.org/phpbox)** • **[Live Benchmarks](https://nobotech.org/benchmarks)** • **[All Releases](https://github.com/Solayman/phpbox-releases/releases)** • **[Report an Issue](https://github.com/Solayman/phpbox-releases/issues)**
+**[Official Website](https://nobotech.org/phpbox)** • **[Facebook Page](https://www.facebook.com/profile.php?id=61595418016860)** • **[Live Benchmarks](https://nobotech.org/benchmarks)** • **[All Releases](https://github.com/Solayman/phpbox-releases/releases)** • **[Report an Issue](https://github.com/Solayman/phpbox-releases/issues)**
 
 </div>
 
@@ -131,18 +132,32 @@ sha256sum Phpbox_1.0.2_amd64.deb
 
 ---
 
-## 🌐 Official Links & Resources
+## 🌐 Official Resources, Community & Connect
 
-- **Official Website**: [https://nobotech.org/phpbox](https://nobotech.org/phpbox)
-- **Nobo Tech Systems**: [https://nobotech.org](https://nobotech.org)
-- **Bug Reports & Feedback**: [Issues Tracker](https://github.com/Solayman/phpbox-releases/issues)
-- **Security Inquiries**: `security@nobotech.org`
+Connect with the Nobo Tech team, follow live release announcements, and access official developer channels:
+
+| Resource & Channel | Purpose | Direct Access |
+| :--- | :--- | :--- |
+| 🌍 **Phpbox Official Portal** | Product specifications, latest updates & feature highlights | [**nobotech.org/phpbox**](https://nobotech.org/phpbox) |
+| 🏢 **Nobo Tech Systems** | Parent engineering lab, architectural philosophy & full ecosystem | [**nobotech.org**](https://nobotech.org) |
+| 📢 **Official Facebook Page** | Live release announcements, engineering blogs & community news | [**Nobo Tech on Facebook**](https://www.facebook.com/profile.php?id=61595418016860) |
+| ⚡ **Hardware Benchmarks** | Authentic RAM and latency metrics from production hardware | [**nobotech.org/benchmarks**](https://nobotech.org/benchmarks) |
+| 🐛 **Issue & Bug Tracker** | Report defects, request capabilities & track ongoing fixes | [**GitHub Issues**](https://github.com/Solayman/phpbox-releases/issues) |
+| 🛡️ **Security Inquiries** | Responsible security disclosure and verification | [`security@nobotech.org`](mailto:security@nobotech.org) |
 
 ---
 
 <div align="center">
 
-**Phpbox Desktop IDE** is developed and maintained by **Solayman Ali** at **[Nobo Tech](https://nobotech.org)**.  
-*Copyright © 2026 Solayman Ali / Nobo Tech. All rights reserved.*
+### Built with Radical Efficiency by Nobo Tech
+
+**Phpbox Desktop IDE** is engineered and maintained by **Solayman Ali** at **[Nobo Tech](https://nobotech.org)**.  
+*Building ultra-lightweight tools that boot in microseconds and respect system resources.*
+
+[Official Website](https://nobotech.org/phpbox) • [Facebook Community](https://www.facebook.com/profile.php?id=61595418016860) • [Releases Hub](https://github.com/Solayman/phpbox-releases/releases) • [Issue Tracker](https://github.com/Solayman/phpbox-releases/issues)
+
+<br/>
+
+<sub>Copyright © 2026 Solayman Ali / Nobo Tech. All rights reserved. Proprietary software.</sub>
 
 </div>

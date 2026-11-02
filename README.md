@@ -1,8 +1,148 @@
-# Phpbox Binary Releases
+<div align="center">
 
-Official distribution repository for Phpbox desktop application binaries (Windows and Linux).
+# Phpbox Desktop IDE
 
-- **Product**: Phpbox Desktop IDE
-- **Latest Release**: v1.0.2 (2026-11-01)
-- **Publisher**: Nobotech
-- **Website**: https://nobotech.org
+### The Lightweight, High-Performance Desktop Code Editor for PHP & Laravel Projects
+
+[![Release](https://img.shields.io/github/v/release/Solayman/phpbox-releases?color=10b981&label=Release&logo=github)](https://github.com/Solayman/phpbox-releases/releases/latest)
+[![Platforms](https://img.shields.io/badge/Platforms-Windows%20%7C%20Linux-3b82f6?logo=linux&logoColor=white)](https://github.com/Solayman/phpbox-releases/releases)
+[![Memory Footprint](https://img.shields.io/badge/Idle%20RAM-~150MB%20(Win)%20%7C%20~450MB%20(Linux)-06b6d4)](#-authentic-performance--hardware-benchmarks)
+[![Publisher](https://img.shields.io/badge/Publisher-Nobo%20Tech-10b981)](https://nobotech.org)
+[![License](https://img.shields.io/badge/License-Proprietary-64748b)](https://nobotech.org)
+
+**[Official Website](https://nobotech.org/phpbox)** • **[Live Benchmarks](https://nobotech.org/benchmarks)** • **[All Releases](https://github.com/Solayman/phpbox-releases/releases)** • **[Report an Issue](https://github.com/Solayman/phpbox-releases/issues)**
+
+</div>
+
+---
+
+## ⚡ What is Phpbox?
+
+**Phpbox** is a modern, ultra-lightweight desktop integrated development environment (IDE) specifically engineered for **PHP** and **Laravel** developers. Built from the ground up with **Tauri 2 (Rust)** and **React**, Phpbox eliminates the excessive memory consumption, sluggish indexing, and heavy runtime overhead of legacy Electron- or JVM-based IDEs.
+
+It delivers familiar, full-featured IDE workflows—including on-demand language server intelligence (Intelephense), deep Laravel framework navigation, an integrated terminal, Composer/PHPUnit runners, Xdebug integration, and a complete visual Git suite—while idling at a fraction of standard IDE memory usage.
+
+### 🌟 Key Highlights & Capabilities
+- 🚀 **Sub-Second Cold Boot**: Launches and loads your codebase in **under 1.0 second**.
+- 🍃 **Radical Efficiency**: Idles at **~150 MB RAM on Windows** and **~450 MB RAM on Linux**—never starving system memory needed for local Docker containers, MySQL/PostgreSQL databases, or test suites.
+- 🎯 **Deep PHP & Laravel Intelligence**: Instant symbol resolution, Eloquent relationship navigation, Blade template formatting, Artisan command palette, and route inspector.
+- 🛠️ **Developer-Centric Tooling**: Visual 3-way Git merge conflict resolver, Patch Vault, low-latency ConPTY/PTY terminal tabs, and Xdebug DBGp debugger.
+- 🤖 **Sandboxed AI Coding Agents**: Native ACP client supporting Claude, Antigravity, and Codex with strict manual approval safety boundaries.
+
+---
+
+## 📦 Official Binary Releases & Downloads (v1.0.2)
+
+Download the official production builds for your operating system:
+
+| Operating System | Package Type | Architecture | Download Link | SHA-256 Checksum |
+| :--- | :--- | :--- | :--- | :--- |
+| **Windows 10 / 11** | `.exe` (NSIS Installer) | 64-bit (`x64`) | [**Download Windows Installer**](https://github.com/Solayman/phpbox-releases/releases/download/v1.0.2/Phpbox_1.0.2_x64-setup.exe) | `4d458f2d2c6b53ead9e2610c7e06f2485d830d4773694ff71a9dc5e7b440a6a7` |
+| **Linux (Ubuntu / Debian / Mint)** | `.deb` (Debian Package) | 64-bit (`amd64`) | [**Download Linux .deb**](https://github.com/Solayman/phpbox-releases/releases/download/v1.0.2/Phpbox_1.0.2_amd64.deb) | `494b7b93938ac62eac88da621a806dec88fb0bbc632360fc68c3674bd4416557` |
+
+> 🔗 For complete changelogs and previous versions, explore the [**Releases Hub**](https://github.com/Solayman/phpbox-releases/releases).
+
+---
+
+## 🚀 Installation Guide
+
+### Windows Installation
+1. Download [`Phpbox_1.0.2_x64-setup.exe`](https://github.com/Solayman/phpbox-releases/releases/download/v1.0.2/Phpbox_1.0.2_x64-setup.exe).
+2. Run the installer and follow the guided setup.
+3. *Code Signing & Trust:* Production Windows binaries are officially signed by **Nobotech** with SHA-256 and RFC 3161 timestamps.
+
+### Linux Installation (Debian / Ubuntu / Linux Mint)
+Download the `.deb` package and install it via your terminal:
+
+```bash
+# 1. Install the Debian package
+sudo dpkg -i Phpbox_1.0.2_amd64.deb
+
+# 2. Resolve dependencies if prompted (WebKit2GTK)
+sudo apt-get install -f
+
+# 3. Launch Phpbox
+phpbox
+```
+
+---
+
+## 📊 Authentic Performance & Hardware Benchmarks
+
+Phpbox is engineered with transparent, verified metrics measured directly on physical hardware without artificial marketing deflation:
+
+| Performance Metric | Phpbox Desktop IDE | Traditional PHP IDEs |
+| :--- | :--- | :--- |
+| **Cold Startup Time** | **< 1.0 Second** | 8 – 25 Seconds |
+| **Windows Idle RAM** | **~150 MB** | 1,800 – 3,500 MB |
+| **Linux Idle RAM** | **~450 MB** | 2,200 – 4,000 MB |
+| **Installer Size** | **~3.5 MB** | 600 – 1,200 MB |
+| **Underlying Architecture** | **Tauri 2 (Rust) + Native Webview** | Heavyweight Electron / JVM |
+
+---
+
+## ✨ Core Feature Overview
+
+### 🐘 PHP & Laravel First-Class Intelligence
+- **Intelephense LSP Integration**: On-demand initialization with zero background thread leaks.
+- **Composer Intelligence**: PSR-4 auto-discovery, multi-app namespace mapping, and plural `resolveClasses` declaration chooser.
+- **Laravel Navigation**: Direct navigation to Eloquent models, relationships, controllers, and Blade template syntax formatting.
+- **Artisan & Routes Panel**: Interactive Artisan command runner and categorized route inspector with direct method jump navigation.
+
+### 🔀 Complete Integrated Git Studio
+- **Commit Management**: Native Git status grouping, hunk inspection, and unstage resilience.
+- **3-Way Merge Conflict Resolver**: Visual 3-column conflict resolution with per-hunk actions and inline editing.
+- **Patch Vault**: Save, manage, compare, and revert custom patches and stashes with a dedicated Recently Deleted recycle bin.
+- **Git Safety Guards**: Built-in argument injection prevention and dubious ownership verification (`safe.directory`).
+
+### ⌨️ Multi-Keymap Architecture
+Transition seamlessly without losing muscle memory:
+- **Phpbox Standard Keymap** (Default)
+- **PhpStorm Compatible Preset**
+- **VS Code Compatible Preset**
+- Dynamic keyboard shortcuts editor (`Ctrl+Alt+S`) with conflict detection.
+
+### 🤖 Sandboxed AI Coding Agents
+- Native **ACP (Agent Client Protocol)** client with header selectors for **Claude**, **Antigravity**, and **Codex**.
+- Strict **Manual Approval Controls** preventing unintended terminal command chains or destructive shell execution.
+- Centralized session history stored securely in user AppData.
+
+---
+
+## 🔒 Security, Integrity & Verification
+
+Every official Phpbox binary package is verified and authenticated:
+- **Code Signing**: Windows installers are signed using the official **Nobotech** certificate (`SHA-256`, RFC 3161 timestamped).
+- **Dual-Verification Endpoint**: Built-in update client verifies releases using Ed25519 cryptographic signatures served through `console.nobotech.org`.
+
+### Verifying SHA-256 Checksums
+
+**Windows (PowerShell):**
+```powershell
+Get-FileHash -Path "Phpbox_1.0.2_x64-setup.exe" -Algorithm SHA256
+# Expected: 4D458F2D2C6B53EAD9E2610C7E06F2485D830D4773694FF71A9DC5E7B440A6A7
+```
+
+**Linux (Bash):**
+```bash
+sha256sum Phpbox_1.0.2_amd64.deb
+# Expected: 494b7b93938ac62eac88da621a806dec88fb0bbc632360fc68c3674bd4416557  Phpbox_1.0.2_amd64.deb
+```
+
+---
+
+## 🌐 Official Links & Resources
+
+- **Official Website**: [https://nobotech.org/phpbox](https://nobotech.org/phpbox)
+- **Nobo Tech Systems**: [https://nobotech.org](https://nobotech.org)
+- **Bug Reports & Feedback**: [Issues Tracker](https://github.com/Solayman/phpbox-releases/issues)
+- **Security Inquiries**: `security@nobotech.org`
+
+---
+
+<div align="center">
+
+**Phpbox Desktop IDE** is developed and maintained by **Solayman Ali** at **[Nobo Tech](https://nobotech.org)**.  
+*Copyright © 2026 Solayman Ali / Nobo Tech. All rights reserved.*
+
+</div>
